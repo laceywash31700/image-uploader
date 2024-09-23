@@ -1,10 +1,15 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 {% block title %}
 My super awesome django project
 {% endblock %}
 {% block body %}
 {% for post in post %}
-    {{post}}
-    <hr>
+{{post.text}}
+<br>
+{% thumbnail post.image "200x200" crop="center" as im %}
+<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+{% endthumbnail %}
+<hr>
 {% endfor %}
 {% endblock %}
