@@ -1,15 +1,19 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load thumbnail %}
 {% block title %}
-My super awesome django project
+  My super awesome django project
 {% endblock %}
 {% block body %}
-{% for post in post %}
-{{post.text}}
-<br>
-{% thumbnail post.image "200x200" crop="center" as im %}
-<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-{% endthumbnail %}
-<hr>
-{% endfor %}
+<a href="{% url 'feed:post' %}">Add new post &rarr;</a>
+ <hr>
+  {% for post in post %}
+    <a href="{% url 'feed:detail' post.id %}" style='display: inline-block;'>
+      {{ post.text }}
+      <br />
+      {% thumbnail post.image '200x200' crop='center' as im %}
+      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+      {% endthumbnail %}
+    </a>
+    <hr />
+  {% endfor %}
 {% endblock %}
